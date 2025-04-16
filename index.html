@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/media.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon.png"
+    />
+    <script defer src="app.js"></script>
+    <title>Age calculator app</title>
+  </head>
+  <body>
+    <div class="card">
+      <form action="/main.php" class="form" novalidate>
+        <div class="form__primary">
+          <div class="container">
+            <label for="day" class="container__day-label">Day</label>
+            <input
+              type="number"
+              id="day"
+              name="day"
+              placeholder="DD"
+              value=""
+            />
+            <p class="container__error container__error-day">
+              Must be a valid day
+            </p>
+          </div>
+          <div class="container">
+            <label for="month" class="container__month-label">Month</label>
+            <input type="number" id="month" name="month" placeholder="MM" />
+            <p class="container__error container__error-month">
+              Must be a valid month
+            </p>
+          </div>
+          <div class="container">
+            <label for="year" class="container__year-label">Year</label>
+            <input type="number" id="year" name="year" placeholder="YYYY" />
+            <p class="container__error container__error-year">
+              Must be in the past
+            </p>
+          </div>
+        </div>
+        <div class="form__secondary">
+          <button class="btn">
+            <img
+              src="assets/images/icon-arrow.svg"
+              alt="An arrow icon to submit the form"
+              loading="lazy"
+              class="img"
+            />
+          </button>
+        </div>
+      </form>
+      <main class="hero">
+        <div class="hero__container">
+          <span class="hero__output hero__output--years">- -</span>
+          <p class="hero__description">years</p>
+        </div>
+        <div class="hero__container">
+          <span class="hero__output hero__output--months">- -</span>
+          <p class="hero__description">months</p>
+        </div>
+        <div class="hero__container">
+          <span class="hero__output hero__output--days">- -</span>
+          <p class="hero__description">days</p>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,232 @@
+/* --------------- SELF HOSTED GOOGLE FONT -------------------------- */
+
+
+@font-face {
+    font-family: "poppins";
+    font-weight: 400;
+    src: url('../fonts/poppins-regular-webfont.woff2') format('woff2'),
+        url('../fonts/poppins-regular-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: "poppins";
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/poppins-italic-webfont.woff2') format('woff2'),
+        url('../fonts/poppins-italic-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: "poppins";
+    font-weight: 700;
+    src: url('../fonts/poppins-bold-webfont.woff2') format('woff2'),
+        url('../fonts/poppins-bold-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: "poppins";
+    font-style: italic;
+    font-weight: 700;
+    src: url('../fonts/poppins-bolditalic-webfont.woff2') format('woff2'),
+        url('../fonts/poppins-bolditalic-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: "poppins";
+    font-weight: 900;
+    src: url('../fonts/poppins-extrabold-webfont.woff2') format('woff2'),
+        url('../fonts/poppins-extrabold-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: "poppins";
+    font-style: italic;
+    font-weight: 900;
+    src: url('../fonts/poppins-extrabolditalic-webfont.woff2') format('woff2'),
+        url('../fonts/poppins-extrabolditalic-webfont.woff') format('woff');
+}
+
+:root {
+
+    /* ----- PRIMARY COLORS -------  */
+    --clr-purple-500: hsl(259, 100%, 65%);
+    --clr-red-400: hsl(0, 100%, 67%);
+    /* ----- NEUTRAL COLORS -------  */
+    --clr-white-500: hsl(0, 100%, 100%);
+    --clr-grey-100: hsl(0, 0%, 94%);
+    --clr-grey-200: hsl(0, 0%, 86%);
+    --clr-grey-500: hsl(0, 1%, 44%);
+    --clr-black-900: hsl(0, 0%, 0%);
+
+}
+
+body {
+    font-family: "poppins", sans-serif;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--clr-grey-200);
+}
+
+/* ------------ TYPOGRAPHY --------------  */
+
+.form input {
+    padding: 1.5em;
+    margin: 0.5em 0;
+    outline: 1px solid var(--clr-grey-200);
+    border: 0;
+    border-radius: 0.3em;
+    width: 85%;
+    color: var(--clr-black-900);
+    font-weight: 700;
+    -moz-appearance: textfield;
+    transition: 0.15s outline ease-in;
+
+}
+
+.form input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+.form input::placeholder {
+    color: var(--clr-grey-500);
+    font-weight: 700;
+
+}
+
+.form input:hover,
+.form input:focus {
+    outline: 2px solid var(--clr-purple-500);
+
+}
+
+.form label {
+    color: var(--clr-grey-500);
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.container__error {
+    color: var(--clr-red-400);
+    font-size: 0.8rem;
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 0.2em;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s visibility ease-in, 0.2s opacity ease-in;
+}
+
+
+.hero__output {
+    color: var(--clr-purple-500);
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-style: italic;
+
+
+}
+
+.hero__description {
+    color: var(--clr-black-900);
+    font-weight: 900;
+    font-style: italic;
+    font-size: 2.5rem;
+    letter-spacing: -0.02em;
+}
+
+
+.btn {
+    border-radius: 50%;
+    border: 0;
+    background-color: var(--clr-purple-500);
+    padding: 1em;
+    transition: 0.2s background-color ease-in, 0.2s cursor ease-in;
+
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: var(--clr-black-900);
+    cursor: pointer;
+}
+
+.img {
+    max-width: 20px;
+}
+
+
+/* -------------- LAYOUT -----------------  */
+
+.card {
+    background-color: var(--clr-white-500);
+    padding: 3em 1em;
+    max-width: 550px;
+    width: 90%;
+    border-radius: 1.5em 1.5em 25% 1.5em;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.0.05);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.form__primary {
+    display: flex;
+    gap: 0;
+
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.hero {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.hero__container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+
+/* ----------- HIDDEN CLASS ----------  */
+
+
+.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.outline__active {
+    outline: 1px solid var(--clr-purple-500);
+}
+
+
+.card .form .outline__error {
+    outline: 1px solid var(--clr-red-400);
+}
+
+.card .form .color__error {
+    color: var(--clr-red-400);
+}
