@@ -105,16 +105,22 @@ form.addEventListener("submit", (e) => {
     if (!dayInput.value.trim()) {
       invalidDayError.innerText = "This field is required";
       invalidDayError.classList.add("active");
+      dayLabel.classList.add("color__error");
+      dayInput.classList.add("outline__error");
       isValid = false;
     }
     if (!monthInput.value.trim()) {
       invalidMonthError.innerText = "This field is required";
       invalidMonthError.classList.add("active");
+      monthLabel.classList.add("color__error");
+      monthInput.classList.add("outline__error");
       isValid = false;
     }
     if (!yearInput.value.trim()) {
       invalidYearError.innerText = "This field is required";
       invalidYearError.classList.add("active");
+      yearLabel.classList.add("color__error");
+      yearInput.classList.add("outline__error");
       isValid = false;
     }
   }
@@ -145,16 +151,20 @@ form.addEventListener("submit", (e) => {
 dayInput.addEventListener("input", () => {
   if (dayInput.value) {
     invalidDayError.classList.remove("active");
+    dayInput.classList.add("outline__input");
+    dayLabel.classList.add("color__label");
   }
 });
 monthInput.addEventListener("input", () => {
   if (monthInput.value) {
     invalidMonthError.classList.remove("active");
+    monthLabel.classList.add("color__label");
   }
 });
 yearInput.addEventListener("input", () => {
   if (yearInput.value) {
     invalidYearError.classList.remove("active");
+    yearLabel.classList.add("color__label");
   }
 });
 
