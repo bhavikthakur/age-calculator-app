@@ -15,16 +15,6 @@ const invalidDayError = document.querySelector(".container__error-day");
 const invalidMonthError = document.querySelector(".container__error-month");
 const invalidYearError = document.querySelector(".container__error-year");
 
-// video
-const video = document.getElementById("celebrationVideo");
-
-function playCelebrationVideo() {
-  video.classList.remove("hidden__video");
-  video.classList.add("show__video");
-  video.currentTime = 0;
-  video.play();
-}
-
 // Blocking users from certain keys to avoid characters and symbols
 [dayInput, monthInput, yearInput].forEach((input) =>
   input.addEventListener("keydown", (e) => {
@@ -174,12 +164,6 @@ form.addEventListener("submit", (e) => {
   function validAgeInput() {
     if (isValid) {
       displayAge();
-      playCelebrationVideo();
-
-      const timeOutId = setTimeout(() => {
-        video.classList.add("hidden__video");
-      }, 2000);
-      return timeOutId;
     }
   }
 
