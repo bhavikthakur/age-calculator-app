@@ -9,30 +9,51 @@ const monthOutput = document.querySelector(".hero__output--months");
 const dayOutput = document.querySelector(".hero__output--days");
 const form = document.querySelector(".form");
 const allErrors = document.querySelectorAll(".container__error");
+const allInputs = document.querySelectorAll("input");
+const allLabels = document.querySelectorAll("label");
 const invalidDayError = document.querySelector(".container__error-day");
 const invalidMonthError = document.querySelector(".container__error-month");
 const invalidYearError = document.querySelector(".container__error-year");
+
+// video
+const video = document.getElementById("celebrationVideo");
+
+function playCelebrationVideo() {
+  video.classList.remove("hidden__video");
+  video.classList.add("show__video");
+  video.currentTime = 0;
+  video.play();
+}
+
+// Blocking users from certain keys to avoid characters and symbols
+[dayInput, monthInput, yearInput].forEach((input) =>
+  input.addEventListener("keydown", (e) => {
+    if (["e", "E", "+", "-"].includes(e.key)) {
+      e.preventDefault();
+    }
+  })
+);
+
+const dateObject = new Date();
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const userDate = Number(dayInput.value);
   const userMonth = Number(monthInput.value);
   const userYear = Number(yearInput.value);
-
-  const dateObject = new Date();
   const currentDate = dateObject.getDate();
   const currentMonth = dateObject.getMonth() + 1;
   const currentYear = dateObject.getFullYear();
+  let isValid = true;
 
   let calculatedYear = 0;
   let calculatedMonth = 0;
   let calculatedDate = 0;
-  let isValid = true;
 
   function calculateAge() {
-    calculatedYear = currentYear - userYear;
-    calculatedMonth = currentMonth - userMonth;
-    calculatedDate = currentDate - userDate;
+    calculatedYear = currentYear - userYear; // get birth year
+    calculatedMonth = currentMonth - userMonth; // get months if not negative value
+    calculatedDate = currentDate - userDate; // get days if not negative value
 
     // Handle months less than 0
     if (calculatedMonth < 0) {
@@ -61,6 +82,8 @@ form.addEventListener("submit", (e) => {
 
   function resetAllErrors() {
     allErrors.forEach((error) => error.classList.remove("active"));
+    allInputs.forEach((input) => input.classList.remove("outline__error"));
+    allLabels.forEach((label) => label.classList.remove("color__error"));
   }
   resetAllErrors();
 
@@ -69,7 +92,6 @@ form.addEventListener("submit", (e) => {
       dayInput.value.trim() !== "" &&
       (isNaN(userDate) || userDate < 1 || userDate > 31)
     ) {
-      invalidDayError.innerText = "Must be a valid day";
       invalidDayError.classList.add("active");
       dayLabel.classList.add("color__error");
       dayInput.classList.add("outline__error");
@@ -80,7 +102,6 @@ form.addEventListener("submit", (e) => {
       monthInput.value.trim() !== "" &&
       (isNaN(userMonth) || userMonth < 1 || userMonth > 12)
     ) {
-      invalidMonthError.innerText = "Must be a valid month";
       invalidMonthError.classList.add("active");
       monthLabel.classList.add("color__error");
       monthInput.classList.add("outline__error");
@@ -91,10 +112,16 @@ form.addEventListener("submit", (e) => {
       yearInput.value.trim() !== "" &&
       (isNaN(userYear) || userYear > currentYear)
     ) {
-      invalidYearError.innerText = "Must be in the past";
       invalidYearError.classList.add("active");
       yearLabel.classList.add("color__error");
       yearInput.classList.add("outline__error");
+      isValid = false;
+    }
+
+    if (userDate > 29 && userMonth === 2) {
+      invalidMonthError.classList.add("active");
+      monthLabel.classList.add("color__error");
+      monthInput.classList.add("outline__error");
       isValid = false;
     }
   }
@@ -126,15 +153,32 @@ form.addEventListener("submit", (e) => {
   }
   showEmptyError();
 
+  function validDateCheck() {
+    if (
+      (userMonth === 4 && userDate > 30) ||
+      (userMonth === 6 && userDate > 30) ||
+      (userMonth === 9 && userDate > 30) ||
+      (userMonth === 11 && userDate > 30)
+    ) {
+      dayLabel.classList.add("color__error");
+      invalidDayError.classList.add("active");
+      dayInput.classList.add("outline__error");
+      monthLabel.classList.add("color__error");
+      invalidMonthError.classList.add("active");
+      monthInput.classList.add("outline__error");
+      isValid = false;
+    }
+  }
+  validDateCheck();
+
   function validAgeInput() {
     if (isValid) {
       displayAge();
+      playCelebrationVideo();
+
       const timeOutId = setTimeout(() => {
-        form.reset();
-        yearOutput.innerText = "- -";
-        monthOutput.innerText = "- -";
-        dayOutput.innerText = "- -";
-      }, 5000);
+        video.classList.add("hidden__video");
+      }, 2000);
       return timeOutId;
     }
   }
@@ -142,36 +186,56 @@ form.addEventListener("submit", (e) => {
   validAgeInput();
 
   function displayAge() {
-    yearOutput.innerText = calculateAge()[0];
-    monthOutput.innerText = calculateAge()[1];
-    dayOutput.innerText = calculateAge()[2];
+    const [years, months, days] = calculateAge();
+    yearOutput.innerText = years;
+    monthOutput.innerText = months;
+    dayOutput.innerText = days;
   }
 });
 
 dayInput.addEventListener("input", () => {
-  if (dayInput.value) {
+  if (dayInput.value <= 0 || dayInput.value > 31) {
+    dayLabel.classList.add("color__error");
+    invalidDayError.classList.add("active");
+    dayInput.classList.add("outline__error");
+  } else {
+    dayLabel.classList.remove("color__error");
     invalidDayError.classList.remove("active");
-    dayInput.classList.add("outline__input");
-    dayLabel.classList.add("color__label");
+    dayInput.classList.remove("outline__error");
+  }
+
+  if (!dayInput.value.trim()) {
+    invalidDayError.innerText = "This field is required";
   }
 });
 monthInput.addEventListener("input", () => {
-  if (monthInput.value) {
+  if (monthInput.value <= 0 || monthInput.value > 12) {
+    monthLabel.classList.add("color__error");
+    invalidMonthError.classList.add("active");
+    monthInput.classList.add("outline__error");
+  } else {
+    monthLabel.classList.remove("color__error");
     invalidMonthError.classList.remove("active");
-    monthLabel.classList.add("color__label");
+    monthInput.classList.remove("outline__error");
+  }
+
+  if (!monthInput.value.trim()) {
+    invalidMonthError.innerText = "This field is required";
   }
 });
 yearInput.addEventListener("input", () => {
-  if (yearInput.value) {
+  let currentYearCopy = dateObject.getFullYear();
+  if (yearInput.value > currentYearCopy) {
+    yearLabel.classList.add("color__error");
+    invalidYearError.classList.add("active");
+    yearInput.classList.add("outline__error");
+  } else {
+    yearLabel.classList.remove("color__error");
     invalidYearError.classList.remove("active");
-    yearLabel.classList.add("color__label");
+    yearInput.classList.remove("outline__error");
+  }
+
+  if (!yearInput.value.trim()) {
+    invalidYearError.innerText = "This field is required";
   }
 });
-
-[dayInput, monthInput, yearInput].forEach((input) =>
-  input.addEventListener("keydown", (e) => {
-    if (["e", "E", "+", "-"].includes(e.key)) {
-      e.preventDefault();
-    }
-  })
-);

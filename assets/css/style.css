@@ -70,6 +70,21 @@ body {
     background-color: var(--clr-grey-200);
 }
 
+.show__video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1000;
+    transition: 0.2s all ease-in-out;
+}
+
+
 /* ------------ TYPOGRAPHY --------------  */
 
 .form input {
@@ -218,23 +233,31 @@ body {
 }
 
 
-.outline__active {
+input.outline__active {
     outline: 1px solid var(--clr-purple-500);
 }
 
-
-.card .form .outline__error {
+input.outline__error {
     outline: 1px solid var(--clr-red-400);
 }
 
-.card .form .outline__input {
+input.outline__input {
     outline: 1px solid var(--clr-purple-500);
 }
 
-.card .form .color__error {
+.color__label {
+    color: var(--clr-grey-500);
+}
+
+label.color__error {
     color: var(--clr-red-400);
 }
 
-.card .form .color__label {
-    color: var(--clr-grey-500);
+
+.hidden__video {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    height: auto;
 }
