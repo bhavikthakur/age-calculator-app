@@ -2,8 +2,8 @@
 
 A sleek and fully responsive **Age Calculator** built from scratch using **HTML, CSS, and JavaScript**. This project was crafted as part of the [Frontend Mentor](https://www.frontendmentor.io) challenge to strengthen my DOM manipulation skills, form validation logic, and error handling.
 
-![Design Preview](./assets/images/desktop-view.png)
-![Design Preview](./assets/images/mobile-view.png)
+![Design Preview](./design/images/desktop-view.png)
+![Design Preview](./design/images/mobile-view.png)
 
 ---
 
